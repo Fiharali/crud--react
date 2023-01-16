@@ -1,10 +1,14 @@
-import  { useState } from 'react'
+import  { useState,useContext } from 'react'
 import { useDispatch , useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom';
 import { updateUserAction } from './../Config/Action';
+import { modeContext } from './../App';
+
 
 function UpdateUser() {
   const {id} = useParams()
+  const mode = useContext(modeContext)
+
   const user = useSelector(data => data.users.find((u)=>u.id===parseInt(id)))
   const [name, setName] = useState(user.name)
   const [email, setEmail] = useState(user.email)
@@ -26,13 +30,13 @@ function UpdateUser() {
         <div className='col-8 mx-auto'>
           <form>
             <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label text-white">Email address</label>
-              <input type="text" className="form-control text-white bg-dark " id="exampleInputEmail1"
+              <label htmlFor="exampleInputEmail1" className={mode?"form-label text-white":"form-label text-dark"}>Email address</label>
+              <input type="text" className={mode?"form-control text-white bg-dark ":"form-control text-dark bg-white "} id="exampleInputEmail1"
                 value={name} onChange={(e) => setName(e.target.value)} />
             </div>
             <div className="mb-3">
-              <label htmlFor="exampleInputPassword1" className="form-label text-white">Password</label>
-              <input type="email" className="form-control text-white bg-dark " id="exampleInputPassword1"
+              <label htmlFor="exampleInputPassword1" className={mode?"form-label text-white":"form-label text-dark"}>Password</label>
+              <input type="email" className={mode?"form-control text-white bg-dark ":"form-control text-dark bg-white "} id="exampleInputPassword1"
                 value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
 

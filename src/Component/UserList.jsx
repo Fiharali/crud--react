@@ -1,10 +1,15 @@
-import React from 'react'
+import { useContext } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteUserAction } from './../Config/Action';
+import { modeContext } from './../App';
+
+
 
 function UserList() {
   const users = useSelector(data => data.users)
+  const mode = useContext(modeContext)
+
   const dispatch = useDispatch()
   const handleDelete = () => {
     dispatch(deleteUserAction(id))
@@ -16,7 +21,7 @@ function UserList() {
 
 
           <Link to="/add-user" className="btn btn-primary form-control my-4" >Add User</Link>
-          <table className="table table-dark table-hover">
+          <table className={mode ? "table table-dark table-hover" : "table  table-hover"}>
             <thead>
               <tr>
                 <th scope="col">Id</th>

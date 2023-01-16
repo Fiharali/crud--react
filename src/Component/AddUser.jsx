@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState ,useContext} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { addUserAction } from './../Config/Action';
+import { modeContext } from './../App';
+
+
 
 function AddUser() {
   const count = useSelector(data => data.users.length)
+  const mode = useContext(modeContext)
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const dispatch = useDispatch()
@@ -26,13 +30,13 @@ function AddUser() {
         <div className='col-8 mx-auto'>
           <form>
             <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label text-white">Full Name</label>
-              <input type="text" className="form-control text-white bg-dark " id="exampleInputEmail1"
+              <label htmlFor="exampleInputEmail1" className={mode?"form-label text-white":"form-label text-dark"}>Full Name</label>
+              <input type="text" className={mode?"form-control text-white bg-dark ":"form-control text-dark bg-white "} id="exampleInputEmail1"
                 value={name} onChange={(e) => setName(e.target.value)} />
             </div>
             <div className="mb-3">
-              <label htmlFor="exampleInputPassword1" className="form-label text-white">Email address</label>
-              <input type="gmail" className="form-control text-white bg-dark " id="exampleInputPassword1"
+              <label htmlFor="exampleInputPassword1" className={mode?"form-label text-white":"form-label text-dark"}>Email address</label>
+              <input type="gmail" className={mode?"form-control text-white bg-dark ":"form-control text-dark bg-white "} id="exampleInputPassword1"
                 value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
 
